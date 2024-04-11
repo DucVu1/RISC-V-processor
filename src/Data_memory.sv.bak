@@ -1,0 +1,19 @@
+module Data_memory#(parameter Width = 32, parameter Depth =32)(
+	input logic clk, MemWrite, MemRead,
+	input logic [Width-1:0] Write_data, Address,
+	output logic [Width-1:0] Read_data
+);
+
+logic [Width -1: 0] mem [0 :Depth - 1];
+
+
+always_ff @(posedge clk) begin : Data_memory
+	if (MemWrite) begin 
+		mem[Address] <= Write_data;
+		end
+	else if (MemRead) begin
+		Read_data <= mem[Address];
+		end
+	end
+endmodule
+

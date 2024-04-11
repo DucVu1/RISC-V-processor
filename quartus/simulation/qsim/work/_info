@@ -1,0 +1,85 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\wsl.localhost\Ubuntu-22.04\home\vuminhduc\Computer_Architecture\Pipeline\quartus\simulation\qsim
+vCPU
+Z1 I`0_3XU<RTJ][eQ91dM2lB3
+Z2 VDaR>C=zC^^be`A;zD]VOf1
+Z3 d\\wsl.localhost\Ubuntu-22.04\home\vuminhduc\Computer_Architecture\Pipeline\quartus\simulation\qsim
+Z4 w1712808831
+Z5 8CPU.vo
+Z6 FCPU.vo
+L0 31
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -work|work|CPU.vo|
+Z9 o-work work -O0
+Z10 n@c@p@u
+!i10b 1
+Z11 !s100 ;2LVX]Fg5A=[5g;161UTE3
+!s85 0
+Z12 !s108 1712822603.407000
+Z13 !s107 CPU.vo|
+!s101 -O0
+vCPU_vlg_check_tst
+!i10b 1
+Z14 !s100 [z<5<dek8mnP@;QkA?6LI1
+Z15 I^5X:4km^SN7hVe:8gJf4V1
+Z16 V@[Ol6QKHDa]z<_ZhD[2e[2
+R3
+Z17 w1712808823
+Z18 8CPU.vt
+Z19 FCPU.vt
+L0 59
+R7
+r1
+!s85 0
+31
+Z20 !s108 1712822610.463000
+Z21 !s107 CPU.vt|
+Z22 !s90 -work|work|CPU.vt|
+!s101 -O0
+R9
+Z23 n@c@p@u_vlg_check_tst
+vCPU_vlg_sample_tst
+!i10b 1
+Z24 !s100 FGoCXlMdMO@J_`oJQcX;a2
+Z25 Iihk2OMY<:I7SiSaKn0_z_2
+Z26 VQ?M<ajF;c`;7emToBLcFi3
+R3
+R17
+R18
+R19
+L0 29
+R7
+r1
+!s85 0
+31
+R20
+R21
+R22
+!s101 -O0
+R9
+Z27 n@c@p@u_vlg_sample_tst
+vCPU_vlg_vec_tst
+!i10b 1
+Z28 !s100 B0<N`B6T<]NaJj]=U^IzC2
+Z29 IM_6bdcl0J@9R[;<m]8^3S0
+Z30 VJGhMb3eOK0GJGjGadCX2W1
+R3
+R17
+R18
+R19
+Z31 L0 5468
+R7
+r1
+!s85 0
+31
+R20
+R21
+R22
+!s101 -O0
+R9
+Z32 n@c@p@u_vlg_vec_tst

@@ -1,0 +1,43 @@
+module register_file#(parameter N = 32, Size = 32)(
+	input logic clk, wr_en,
+	input logic [$clog2(N)-1:0] w_addr, r0_addr, r1_addr,
+	input logic [Size-1:0] w_data, 
+  output logic [Size-1:0] r8,
+    output logic [Size-1:0] r11,
+  output logic [Size-1:0] r18,
+  output logic [Size-1:0] r19,
+  output logic [Size-1:0] r20,
+  output logic [Size-1:0] r21,
+  output logic [Size-1:0] r22,
+	output logic [Size-1:0] r0_data, r1_data
+);
+logic [Size-1:0] regs [0:N-1];
+initial begin
+    for (int i = 0; i < 32; i = i + 1)
+      regs[i] = 32'd0;
+
+    regs[11] = 32'd8;
+  end
+
+always_ff@(posedge clk) begin 
+	if(wr_en) begin
+		regs[w_addr] <= w_data;
+	end
+end
+
+  assign r8 = regs[8];
+    assign r11 = regs[11];
+  assign r19 = regs[19];
+  assign r20 = regs[20];
+  assign r21 = regs[26];
+  assign r22 = regs[27];
+  assign r18 = regs[18];
+/* initial begin
+    for (int i = 0; i < 32; i = i + 1)
+      regs[i] = 32'd0;
+ end*/
+always_ff@(posedge clk) begin 
+	r0_data <= regs[r0_addr];
+	r1_data <= regs[r1_addr];
+end
+endmodule
