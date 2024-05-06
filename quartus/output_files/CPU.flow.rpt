@@ -1,5 +1,5 @@
 Flow report for CPU
-Thu Apr 11 15:03:22 2024
+Fri May 03 19:25:44 2024
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,17 +40,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Thu Apr 11 15:03:22 2024           ;
+; Flow Status                        ; Successful - Fri May 03 19:25:44 2024           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; CPU                                             ;
 ; Top-level Entity Name              ; CPU                                             ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 29,117                                          ;
-;     Total combinational functions  ; 29,008                                          ;
-;     Dedicated logic registers      ; 8,682                                           ;
-; Total registers                    ; 8682                                            ;
+; Total logic elements               ; 29,898                                          ;
+;     Total combinational functions  ; 29,791                                          ;
+;     Dedicated logic registers      ; 8,715                                           ;
+; Total registers                    ; 8715                                            ;
 ; Total pins                         ; 288                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 2,048                                           ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/11/2024 15:01:25 ;
+; Start date & time ; 05/03/2024 19:23:52 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; CPU                 ;
 +-------------------+---------------------+
@@ -75,12 +75,10 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 163699398055278.171282248425528       ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 163699398055278.171473903128348       ; --            ; --          ; --             ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; On                                    ; --            ; --          ; eda_simulation ;
-; EDA_NETLIST_WRITER_OUTPUT_DIR       ; simulation/modelsim                   ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                           ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)             ; <None>        ; --          ; --             ;
-; EDA_TIME_SCALE                      ; 1 ps                                  ; --            ; --          ; eda_simulation ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --             ;
 ; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top            ;
@@ -97,10 +95,8 @@ applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:13     ; 1.0                     ; 4720 MB             ; 00:00:46                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4591 MB             ; 00:00:00                           ;
-; EDA Netlist Writer   ; 00:00:08     ; 1.0                     ; 4608 MB             ; 00:00:02                           ;
-; Total                ; 00:01:22     ; --                      ; --                  ; 00:00:48                           ;
+; Analysis & Synthesis ; 00:01:49     ; 1.0                     ; 4707 MB             ; 00:01:00                           ;
+; Total                ; 00:01:49     ; --                      ; --                  ; 00:01:00                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -110,8 +106,6 @@ applicable agreement for further details.
 ; Module Name          ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +----------------------+------------------+-----------+------------+----------------+
 ; Analysis & Synthesis ; DESKTOP-G5J7B49  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer   ; DESKTOP-G5J7B49  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer   ; DESKTOP-G5J7B49  ; Windows 7 ; 6.2        ; x86_64         ;
 +----------------------+------------------+-----------+------------+----------------+
 
 
@@ -119,8 +113,6 @@ applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off CPU -c CPU
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog CPU -c CPU --vector_source=//wsl.localhost/Ubuntu-22.04/home/vuminhduc/Computer_Architecture/Pipeline/quartus/Waveform.vwf --testbench_file=./simulation/qsim/CPU.vt
-quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog CPU -c CPU
 
 
 

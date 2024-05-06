@@ -2,12 +2,12 @@ m255
 K3
 13
 cModel Technology
-Z0 d\\wsl.localhost\Ubuntu-22.04\home\vuminhduc\Computer_Architecture\Pipeline\quartus\simulation\qsim
+Z0 d\\wsl.localhost\Ubuntu-22.04\home\vuminhduc\Computer_Architecture\Pipeline2\quartus\simulation\qsim
 vCPU
-Z1 I`0_3XU<RTJ][eQ91dM2lB3
+Z1 IJ:FS=ZY3XfZehaIm5PYZ;1
 Z2 VDaR>C=zC^^be`A;zD]VOf1
-Z3 d\\wsl.localhost\Ubuntu-22.04\home\vuminhduc\Computer_Architecture\Pipeline\quartus\simulation\qsim
-Z4 w1712808831
+Z3 d\\wsl.localhost\Ubuntu-22.04\home\vuminhduc\Computer_Architecture\Pipeline_test\quartus\simulation\qsim
+Z4 w1714650432
 Z5 8CPU.vo
 Z6 FCPU.vo
 L0 31
@@ -18,18 +18,18 @@ Z8 !s90 -work|work|CPU.vo|
 Z9 o-work work -O0
 Z10 n@c@p@u
 !i10b 1
-Z11 !s100 ;2LVX]Fg5A=[5g;161UTE3
+Z11 !s100 9Ac1ULcXAi[j4cP_K=Z1n0
 !s85 0
-Z12 !s108 1712822603.407000
+Z12 !s108 1714650434.135000
 Z13 !s107 CPU.vo|
 !s101 -O0
 vCPU_vlg_check_tst
 !i10b 1
-Z14 !s100 [z<5<dek8mnP@;QkA?6LI1
-Z15 I^5X:4km^SN7hVe:8gJf4V1
+Z14 !s100 iD92enT>oV_50OTC^g^R83
+Z15 IB;PTF1jglik`_96bfLN_N3
 Z16 V@[Ol6QKHDa]z<_ZhD[2e[2
 R3
-Z17 w1712808823
+Z17 w1714650421
 Z18 8CPU.vt
 Z19 FCPU.vt
 L0 59
@@ -37,7 +37,7 @@ R7
 r1
 !s85 0
 31
-Z20 !s108 1712822610.463000
+Z20 !s108 1714650444.605000
 Z21 !s107 CPU.vt|
 Z22 !s90 -work|work|CPU.vt|
 !s101 -O0

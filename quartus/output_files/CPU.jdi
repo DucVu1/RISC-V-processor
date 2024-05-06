@@ -1,8 +1,8 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="3342b0c189db1a80834a"/>
+    <hash md5_digest_80b="00b42a2d8c7baa2ccd24"/>
   </project>
   <file_info>
-    <file device="EP2C35F672C6" path="//wsl.localhost/Ubuntu-22.04/home/vuminhduc/Computer_Architecture/Pipeline/quartus/output_files/CPU.sof" usercode="0xFFFFFFFF"/>
+    <file device="EP2C35F672C6" path="//wsl.localhost/Ubuntu-22.04/home/vuminhduc/Computer_Architecture/Pipeline2/quartus/output_files/CPU.sof" usercode="0xFFFFFFFF"/>
   </file_info>
 </sld_project_info>

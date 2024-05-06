@@ -11,13 +11,13 @@ module CPU(
 //Instruction_out is the instruction at decode stage and Instruction_in is in the fetch stage
 //funct3 = [14:12] , funct7 = [30], rs2 = [24:20], rs1 = [19:15], opcode = [6:0]
 //PC_added is incemented by 4, PC_calculated is branch targeted
-logic [31:0] Instruc_Address,Instruc_Address2, shifted_data1,PC_added,Branch_address,PC_in;
+logic [31:0] Instruc_Address,Instruc_Address2, shifted_data1,PC_added,Branch_address,PC_in, CompA_data, CompB_data;
 logic [31:0] Immediate_output, Immediate_output2, ReadData02, ReadData12, ALU_result, Jump_address2, shifted_data,Jump_address;
 logic [31:0] ALU_result3, B_INPUT_ALU, Mem_read_data, Mem_read_data2, Write_data,A_INPUT_ALU, B_Pre_INPUT, ReadData13;
 logic ALUSrc2, MemtoReg2, MemRead2, MemWrite2, Branch2, funct7_out, MemtoReg3,  MemRead3, MemWrite3, Branch3;
 logic RegWrite4,RegWrite2,RegWrite3,MemtoReg4 ;
 logic ALUSrc1, MemtoReg1, RegWrite1, MemRead1, MemWrite1, Branch1;
-logic [1:0] Aluop1, Aluop2;
+logic [1:0] Aluop1, Aluop2, ForwardA_Comp, ForwardB_Comp;
 logic [3:0] Operation;
 logic [2:0] funct3;
 logic [4:0] Rs1, Rs2,Register_dest2, Register_dest3;
@@ -52,7 +52,13 @@ Control_Mux21 Control_unit_mux(.ALUSrc(ALUSrc1), .MemtoReg(MemtoReg1), .RegWrite
 
 Shift_left_1bit Shift_left_1bit(.in(Immediate_output),.out(shifted_data));
 
-Comparator Comparator(.funct3(Instruction_out[14:12]),.ReadData0(ReadData0),.ReadData1(ReadData1),.Muxselect(Muxselect));
+Forwarding_MUX_Comparator MUX_CompA(.ALU_data(ALU_result), .register_data(ReadData0), .Memory_data(Mem_read_data), .Mux_control(ForwardA_Comp) , .Data_out(CompA_data));
+
+Forwarding_MUX_Comparator MUX_CompB(.ALU_data(ALU_result), .register_data(ReadData1), .Memory_data(Mem_read_data), .Mux_control(ForwardB_Comp) , .Data_out(CompB_data));
+
+ForwardingUpdate ForwardingUnit2(.IDEX_RegWrite(RegWrite2), .EXMEM_RegWrite(RegWrite3), .RegisterRs1(Instruction_out[19:15]), .RegisterRs2(Instruction_out[24:20]), .IDEX_RegisterRd(Register_dest), .EXMEM_RegisterRd(Register_dest2), .ForwardA(ForwardA_Comp), .ForwardB(ForwardB_Comp));
+
+Comparator Comparator(.funct3(Instruction_out[14:12]),.ReadData0(CompA_data),.ReadData1(CompB_data),.Muxselect(Muxselect));
 
 IDEX_register IDEX_register(.clk(clk),.funct7(Instruction_out[30]),.ALUSrc(ALUSrc),.Branch(Branch),.MemRead(MemRead),.MemWrite(MemWrite),.RegWrite(RegWrite),.MemtoReg(MemtoReg), .flush(Stall | flush),.ALUOp(Aluop),
 .Address_in(Instruc_Address),.Immediate_value(Immediate_output),.Read_data0(ReadData0),.Read_data1(ReadData1),.funct3(Instruction_out[14:12]),.Register_dest(Instruction_out[11:7]),.IFID_registerRs1(Instruction_out[19:15]),.IFID_registerRs2(Instruction_out[24:20]),

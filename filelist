@@ -10,7 +10,9 @@ src/EXMEM_register.sv
 src/FA_1bit.sv
 src/FA_32bit.sv
 src/Forwarding_MUX.sv
+src/Forwarding_MUX_Comparator.sv
 src/ForwardingUnit.sv
+src/ForwardingUpdate.sv
 src/hazard_detection_unit.sv
 src/IDEX_register.sv
 src/IFID_register.sv
