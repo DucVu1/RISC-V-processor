@@ -1,4 +1,4 @@
-module Shift_left_1bit #(parameter Width = 32)(
+module Shift_Comb #(parameter Width = 32)(
 	input logic Option,
 	input logic [Width - 1:0] in,
 	output logic [Width - 1:0] out

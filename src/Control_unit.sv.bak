@@ -5,7 +5,7 @@ module Control_unit(
 );
 always_comb begin
     case (Opcode)
-      7'b0000011: //ld - I 
+      7'b0000011: //ld
         begin
           ALUSrc = 1'b1;
           MemtoReg = 1'b1;
@@ -16,7 +16,7 @@ always_comb begin
           Aluop = 2'b00;
         end
 
-      7'b0100011: //st - S
+      7'b0100011: //sd
         begin
           ALUSrc = 1'b1;
           MemtoReg = 1'bx;
@@ -38,7 +38,7 @@ always_comb begin
           Aluop[1:0] = 2'b10;
         end
 
-      7'b1100011:  //beq + J
+      7'b1100011:  //beq
         begin
           ALUSrc = 1'b0;
           MemtoReg = 1'bx;
@@ -49,7 +49,7 @@ always_comb begin
           Aluop[1:0] = 2'b01;
         end
 
-      7'b0010011: // I instruction
+      7'b0010011:
         begin
           ALUSrc = 1'b1;
           MemtoReg = 1'b0;
@@ -57,7 +57,7 @@ always_comb begin
           MemRead = 1'b0;
           MemWrite = 1'b0;
           Branch = 1'b0;
-          Aluop [1:0] = 2'b10;
+          Aluop = 2'b00;
         end
       default:
         begin

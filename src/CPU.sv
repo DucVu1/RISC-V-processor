@@ -11,15 +11,15 @@ module CPU(
 //Instruction_out is the instruction at decode stage and Instruction_in is in the fetch stage
 //funct3 = [14:12] , funct7 = [30], rs2 = [24:20], rs1 = [19:15], opcode = [6:0]
 //PC_added is incemented by 4, PC_calculated is branch targeted
-logic [31:0] Instruc_Address,Instruc_Address2, shifted_data1,PC_added,Branch_address,PC_in, CompA_data, CompB_data;
+logic [31:0] Instruc_Address,Instruc_Address2, shifted_data1,PC_added,Branch_address,PC_in;
 logic [31:0] Immediate_output, Immediate_output2, ReadData02, ReadData12, ALU_result, Jump_address2, shifted_data,Jump_address;
 logic [31:0] ALU_result3, B_INPUT_ALU, Mem_read_data, Mem_read_data2, Write_data,A_INPUT_ALU, B_Pre_INPUT, ReadData13;
 logic ALUSrc2, MemtoReg2, MemRead2, MemWrite2, Branch2, funct7_out, MemtoReg3,  MemRead3, MemWrite3, Branch3;
 logic RegWrite4,RegWrite2,RegWrite3,MemtoReg4 ;
 logic ALUSrc1, MemtoReg1, RegWrite1, MemRead1, MemWrite1, Branch1;
-logic [1:0] Aluop1, Aluop2, ForwardA_Comp, ForwardB_Comp;
+logic [1:0] Aluop1, Aluop2;
 logic [3:0] Operation;
-logic [2:0] funct3;
+logic [2:0] funct3,funct32;
 logic [4:0] Rs1, Rs2,Register_dest2, Register_dest3;
 //Instruction fetch
 MUX4_1 PC_MUX(.muxselect(Branch & Muxselect), .jump(Branch3), .PC_added(PC_added), .PC_branch(Branch_address), .PC_jump(Jump_address2),.flush(flush),.PC_out(PC_in));
@@ -52,13 +52,7 @@ Control_Mux21 Control_unit_mux(.ALUSrc(ALUSrc1), .MemtoReg(MemtoReg1), .RegWrite
 
 Shift_left_1bit Shift_left_1bit(.in(Immediate_output),.out(shifted_data));
 
-Forwarding_MUX_Comparator MUX_CompA(.ALU_data(ALU_result), .register_data(ReadData0), .Memory_data(Mem_read_data), .Mux_control(ForwardA_Comp) , .Data_out(CompA_data));
-
-Forwarding_MUX_Comparator MUX_CompB(.ALU_data(ALU_result), .register_data(ReadData1), .Memory_data(Mem_read_data), .Mux_control(ForwardB_Comp) , .Data_out(CompB_data));
-
-ForwardingUpdate ForwardingUnit2(.IDEX_RegWrite(RegWrite2), .EXMEM_RegWrite(RegWrite3), .RegisterRs1(Instruction_out[19:15]), .RegisterRs2(Instruction_out[24:20]), .IDEX_RegisterRd(Register_dest), .EXMEM_RegisterRd(Register_dest2), .ForwardA(ForwardA_Comp), .ForwardB(ForwardB_Comp));
-
-Comparator Comparator(.funct3(Instruction_out[14:12]),.ReadData0(CompA_data),.ReadData1(CompB_data),.Muxselect(Muxselect));
+Comparator Comparator(.funct3(Instruction_out[14:12]),.ReadData0(ReadData0),.ReadData1(ReadData1),.Muxselect(Muxselect));
 
 IDEX_register IDEX_register(.clk(clk),.funct7(Instruction_out[30]),.ALUSrc(ALUSrc),.Branch(Branch),.MemRead(MemRead),.MemWrite(MemWrite),.RegWrite(RegWrite),.MemtoReg(MemtoReg), .flush(Stall | flush),.ALUOp(Aluop),
 .Address_in(Instruc_Address),.Immediate_value(Immediate_output),.Read_data0(ReadData0),.Read_data1(ReadData1),.funct3(Instruction_out[14:12]),.Register_dest(Instruction_out[11:7]),.IFID_registerRs1(Instruction_out[19:15]),.IFID_registerRs2(Instruction_out[24:20]),
@@ -69,7 +63,7 @@ hazard_detection_unit HazardDetectionUnit(.IDEX_MemRead(MemRead2),.IDEX_Register
 .Stall(Stall));
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Execute
-RISC_VALU ALU(.A(A_INPUT_ALU),.B(B_INPUT_ALU),.Operation(Operation),.Result(ALU_result)); 
+ALU ALU(.A(A_INPUT_ALU),.B(B_INPUT_ALU),.Operation(Operation[3:1]), .Cin(Operation[0]), .Result(ALU_result)); 
 
 ALU_Control ALU_Control(.ALUOp(Aluop2),.funct7(funct7_out),.funct3(funct3),.Operation(Operation));
 
@@ -87,13 +81,13 @@ ForwardingUnit ForwardingUnit(.IDEX_RegisterRs1(Rs1),.IDEX_RegisterRs2(Rs2),.EXM
 .ForwardA(ForwardA_signal),.ForwardB(ForwardB_signal));
 
 EXMEM_register EXMEM_register(.clk(clk),.Branch(Branch2),.MemRead(MemRead2),.MemWrite(MemWrite2),.RegWrite(RegWrite2),.MemtoReg(MemtoReg2),.flush( Stall | flush),.PC_calculated(Jump_address),.ALU_result(ALU_result),.Read_data1(ReadData12),
-.Register_dest(Register_dest),.PC_calculated_out(Jump_address2),.Branch_out(Branch3),.MemRead_out(MemRead3),.MemWrite_out(MemWrite3),.RegWrite_out(RegWrite3),.MemtoReg_out(MemtoReg3),
-.ALU_result_out(ALU_result2),.Read_data1_out(ReadData13),.Register_dest_out(Register_dest2));
+.Register_dest(Register_dest), .funct3_in(funct3),.PC_calculated_out(Jump_address2),.Branch_out(Branch3),.MemRead_out(MemRead3),.MemWrite_out(MemWrite3),.RegWrite_out(RegWrite3),.MemtoReg_out(MemtoReg3),
+.ALU_result_out(ALU_result2),.Read_data1_out(ReadData13), .funct3_out(funct32),.Register_dest_out(Register_dest2));
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 
 //Mem access
-Data_memory Data_memory(.clk(clk),.MemWrite(MemWrite3),.MemRead(MemRead3), .Write_data(ReadData13),.Address(ALU_result2),.Read_data(Mem_read_data));
+Data_memory Data_memory(.clk(clk),.MemWrite(MemWrite3),.MemRead(MemRead3), .funct3(funct32), .Write_data(ReadData13),.Address(ALU_result2),.Read_data(Mem_read_data));
 
 MEMWB_register MEMWB_register(.clk(clk),.RegWrite(RegWrite3),.MemtoReg(MemtoReg3),.Read_data(Mem_read_data),.ALU_result(ALU_result2),.Register_dest(Register_dest2),.RegWrite_out(RegWrite4),
 .MemtoReg_out(MemtoReg4),.Read_data_out(Mem_read_data2),.ALU_result_out(ALU_result3),.Register_dest_out(Register_dest3));

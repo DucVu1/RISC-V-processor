@@ -1,18 +1,22 @@
-module Comparator(
-	input logic [2:0] funct3,
-	input logic [31:0] ReadData0, ReadData1,
-	output logic Muxselect
+module comparator#(parameter N = 32)(
+	input logic [N-1:0] A, B,
+	output logic less_than
 );
-
+logic [N-2:0] less_than_buffer;
+generate 
+	genvar i ;
+		for (i = 0; i < N  - 1; i = i + 1) begin : check_input
+			assign less_than_buffer[i] = ~A[i] & B[i];
+			end
+endgenerate
 always_comb begin 
-	case(funct3)
-		3'b000: Muxselect = !(ReadData0 ^ ReadData1)?1'b1:1'b0;
-		3'b001: Muxselect = (ReadData0 ^ReadData1) ?1'b1:1'b0;
-		3'b100: Muxselect = (ReadData0 < ReadData1) ? 1'b1 : 1'b0;
-		3'b101: Muxselect = (ReadData0 >= ReadData1) ? 1'b1: 1'b0;
-		3'b110: Muxselect = (ReadData0 < ReadData1) ? 1'b1: 1'b0;
-		3'b111: Muxselect = (ReadData0 >= ReadData1) ? 1'b1: 1'b0;
-		default: Muxselect = 1'b0;
-	endcase
-end 
+	if(A[N-1] & ~B[N-1])
+		less_than = 1'b1;
+	else if(~A[N-1] & B[N-1])
+		less_than = 1'b0;
+	else if(A[N-1] & B[N-1])
+		less_than = ~(|less_than_buffer);
+	else
+		less_than = |less_than_buffer; // do not use this case since it two unsigned number
+	end
 endmodule

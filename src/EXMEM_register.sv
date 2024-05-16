@@ -3,9 +3,11 @@ module EXMEM_register #(parameter Width = 32, parameter Depth = 32)(
 	input logic [Width - 1:0] PC_calculated,
 	input logic [Depth - 1:0] ALU_result, Read_data1, 
 	input logic [4:0] Register_dest,
+	input logic [2:0] funct3_in,
 	output logic [Width - 1:0] PC_calculated_out,
 	output logic Branch_out, MemRead_out, MemWrite_out, RegWrite_out, MemtoReg_out,
 	output logic [Depth - 1:0] ALU_result_out, Read_data1_out,
+	output logic [2:0] funct3_out,
 	output logic [4:0] Register_dest_out
 );
 
@@ -20,6 +22,7 @@ always_ff @(posedge clk) begin
 		MemWrite_out <= MemWrite;
 		RegWrite_out <= RegWrite;
 		MemtoReg_out <= MemtoReg;
+		funct3_out <= funct3_in;
 	end
 	else begin
 		PC_calculated_out <= 32'd0;
@@ -31,6 +34,7 @@ always_ff @(posedge clk) begin
 		MemWrite_out <= 1'b0;
 		RegWrite_out <= 1'b0;
 		MemtoReg_out <= 1'b0;
+		funct3_out <= 3'd0;
 	end
 end
 endmodule

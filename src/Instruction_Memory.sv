@@ -7,8 +7,8 @@ module Instruction_Memory(
   
 initial
     begin
-      {inst_mem[3], inst_mem[2], inst_mem[1], inst_mem[0]} = 32'h00140413;//1 addi x18, x0, 0 #to track a[i] offset00043903
-      {inst_mem[7], inst_mem[6], inst_mem[5], inst_mem[4]} = 32'h00043903;//2 add x8, x0, x0 # i iterator (starts at 0)
+      {inst_mem[3], inst_mem[2], inst_mem[1], inst_mem[0]} = 32'h00000913;//1 addi x18, x0, 0 #to track a[i] offset
+      {inst_mem[7], inst_mem[6], inst_mem[5], inst_mem[4]} = 32'h00000433;//2 add x8, x0, x0 # i iterator (starts at 0)
       {inst_mem[11], inst_mem[10], inst_mem[9], inst_mem[8]} = 32'h04b40863;//3 outerloop: beq x8, x11, outerexit #i < 10
       {inst_mem[15], inst_mem[14], inst_mem[13], inst_mem[12]} = 32'h00800eb3;//4 add x29, x0, x8 # j iterator (set to i each outer loop)
       {inst_mem[19], inst_mem[18], inst_mem[17], inst_mem[16]} = 32'h000409b3;//5 add x19, x8, x0
